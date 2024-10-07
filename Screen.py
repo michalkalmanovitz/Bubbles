@@ -59,6 +59,14 @@ def draw_turns(num_of_turns):
     draw_message(message, consts.TURNS_FONT_SIZE, consts.TURNS_COLOR,
                  consts.TURNS_LOCATION)
 
+def draw_score(score, max_score):
+    message1 = consts.SCORE_TEXT + str(score)
+    draw_message(message1, consts.TURNS_FONT_SIZE, consts.TURNS_COLOR,
+                 consts.SCORE_LOCATION)
+
+    message2 = consts.MAX_SCORE_TEXT + str(max_score)
+    draw_message(message2, consts.TURNS_FONT_SIZE, consts.TURNS_COLOR,
+                 consts.MAX_SCORE_LOCATION)
 
 def draw_lose_message():
     draw_message(consts.LOSE_MESSAGE, consts.LOSE_FONT_SIZE,
@@ -86,6 +94,7 @@ def draw_game(game_state):
     BubblesGrid.draw()
     draw_border()
     draw_turns(game_state["turns_left_to_add_row"])
+    draw_score(game_state["score"], game_state["max_score"])
     Stack.draw()
 
     if len(game_state["bubbles_popping"]):

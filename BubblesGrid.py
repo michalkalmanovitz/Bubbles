@@ -2,6 +2,7 @@ import consts
 import Bubble
 import random
 import Screen
+import pygame
 
 bubbles_grid = []
 
@@ -72,10 +73,12 @@ def get_neighbors_directions(row_number):
     return neighbors_directions
 
 
-def pop_bubbles(bubbles_to_pop_locations):
+def pop_bubbles(bubbles_to_pop_locations, bubble_pop):
     bubbles_popped = []
     for bubble_location in bubbles_to_pop_locations:
         bubbles_popped.append(Bubble.pop(bubbles_grid, bubble_location))
+        # for each popped bubble, sound playes
+        bubble_pop.play()
 
     return bubbles_popped
 
