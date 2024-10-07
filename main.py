@@ -5,17 +5,18 @@ import consts
 import Screen
 import Stack
 
+
 state = {
-    "original_arrow": Screen.create_arrow(consts.ARROW_IMG),
-    "rotated_arrow": None,
-    "is_bubble_fired": False,
-    "bubbles_popping": [],
-    "turns_left_to_add_row": consts.NUM_OF_TURNS_TO_ADD_ROW,
-    "is_window_open": True,
-    "state": consts.RUNNING_STATE,
-    "bullet_bubble": None,
-    "bubble_direction": None,
-    "mouse_angle": None
+        "original_arrow": Screen.create_arrow(consts.ARROW_IMG),
+        "rotated_arrow": "None",
+        "is_bubble_fired": False,
+        "bubbles_popping": [],
+        "turns_left_to_add_row": consts.NUM_OF_TURNS_TO_ADD_ROW,
+        "is_window_open": True,
+        "state": consts.RUNNING_STATE,
+        "bullet_bubble": None,
+        "bubble_direction": None,
+        "mouse_angle": None
 }
 
 state["rotated_arrow"] = state["original_arrow"]
@@ -67,6 +68,7 @@ def main():
 
                 remove_isolated_bubbles()
                 bubble_pop.play()
+
                 BubblesGrid.set_one_empty_line()
                 remove_extinct_colors(consts.bubble_colors)
 
@@ -78,7 +80,6 @@ def main():
                     state["state"] = consts.WIN_STATE
 
         Screen.draw_game(state)
-
 
 def handle_user_events():
     for event in pygame.event.get():
@@ -96,7 +97,6 @@ def handle_user_events():
                 not state["is_bubble_fired"] and \
                 not state["bubbles_popping"]:
             fire_bubble()
-
 
 def rotate_arrow():
     state["mouse_angle"] = Screen.calc_mouse_angle(pygame.mouse.get_pos())
