@@ -11,7 +11,7 @@ screen = pygame.display.set_mode(
 
 
 def draw_bubble(bubble):
-    bubble_draw = bubble["color"]
+    bubble_draw = bubble["img"]
     sized_bubble = pygame.transform.scale(bubble_draw, (
         consts.BUBBLE_WIDTH, consts.BUBBLE_HEIGHT))
 

@@ -19,7 +19,7 @@ def add_bubble(col):
                                     row_start=consts.STACK_LOCATION[0])
     stack.append(Bubble.create(bubble_x,
                                consts.STACK_LOCATION[1],
-                               random.choice(consts.bubble_colors)))
+                               random.choice(consts.bubble_imgs)))
 
 
 def remove_first():
@@ -43,11 +43,11 @@ def draw():
 # -----------------------------------------------------------------------------
 # ---------------------------------your code-----------------------------------
 # -----------------------------------------------------------------------------
-def colors_on_stack():
-    stack_colors = []
+def imgs_on_stack():
+    stack_imgs = []
     for bubble in stack:
-        current_color = bubble["color"]
-        if not current_color in stack_colors:
-            stack_colors.append(current_color)
-    return stack_colors
+        current_img = bubble["img"]
+        if not current_img in stack_imgs:
+            stack_imgs.append(current_img)
+    return stack_imgs
 

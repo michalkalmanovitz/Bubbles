@@ -3,8 +3,8 @@ import math
 import BubblesGrid
 
 
-def create(center_x, center_y, color):
-    return {"color": color,
+def create(center_x, center_y, img):
+    return {"img": img,
             "center_x": center_x,
             "center_y": center_y,
             "radius": consts.BUBBLE_RADIUS}
@@ -47,7 +47,7 @@ def calc_direction(angle):
 def pop(bubbles_grid, bubble_location):
     bubble_popped = bubbles_grid[bubble_location[0]][bubble_location[1]].copy()
     bubbles_grid[bubble_location[0]][bubble_location[1]][
-        "color"] = consts.NO_BUBBLE
+        "img"] = consts.NO_BUBBLE
     return bubble_popped
 
 
@@ -73,7 +73,7 @@ def is_isolated_inner(bubbles_grid, bubble_location, locations_checked):
         if 0 <= new_row < len(bubbles_grid) and \
                 0 <= new_col < consts.BUBBLE_GRID_COLS and \
                 new_location not in locations_checked and \
-                bubbles_grid[new_row][new_col]["color"] != consts.NO_BUBBLE and \
+                bubbles_grid[new_row][new_col]["img"] != consts.NO_BUBBLE and \
                 not is_isolated_inner(bubbles_grid, new_location,
                                       locations_checked):
             return False
@@ -91,8 +91,8 @@ def should_stop(bubbles_grid, bullet_bubble):
     # go through all bubbles, check if tangent / overlapping to bullet_bubble
     for row in bubbles_grid:
         for bubble in row:
-            # check only colored bubbles
-            if bubble["color"] != consts.NO_BUBBLE:
+            # check only imged bubbles
+            if bubble["img"] != consts.NO_BUBBLE:
                 dist = distance_between_two_bubbles(bubble, bullet_bubble)
                 # bubbles are tangent or overlapping
                 if dist < consts.BUBBLE_RADIUS * 2:

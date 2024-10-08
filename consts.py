@@ -68,6 +68,6 @@ BUBBLE_IMG3 = pygame.image.load("3.png")
 BUBBLE_IMG4 = pygame.image.load("4.png")
 BUBBLE_IMG5 = pygame.image.load("5.png")
 BUBBLE_START_IMGS = [BUBBLE_IMG1, BUBBLE_IMG2, BUBBLE_IMG3, BUBBLE_IMG4, BUBBLE_IMG5]
-bubble_colors = BUBBLE_START_IMGS.copy()
+bubble_imgs = BUBBLE_START_IMGS.copy()
 BUBBLE_HEIGHT = 60
 BUBBLE_WIDTH = 40

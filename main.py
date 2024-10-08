@@ -48,13 +48,13 @@ def main():
                 BubblesGrid.put_bubble_in_grid(state["bullet_bubble"],
                                                new_bubble_location)
 
-                same_color_cluster = BubblesGrid.get_same_color_cluster(
+                same_img_cluster = BubblesGrid.get_same_img_cluster(
                     new_bubble_location,
-                    state["bullet_bubble"]["color"],
+                    state["bullet_bubble"]["img"],
                     [])
 
-                if BubblesGrid.should_bubbles_pop(same_color_cluster):
-                    state["bubbles_popping"] = BubblesGrid.pop_bubbles(same_color_cluster)
+                if BubblesGrid.should_bubbles_pop(same_img_cluster):
+                    state["bubbles_popping"] = BubblesGrid.pop_bubbles(same_img_cluster)
                     # points appended to total score as much of bubbles that were popped
                     state["score"] += len(state["bubbles_popping"])
                     if state["score"] > state["max_score"]:
@@ -79,7 +79,7 @@ def main():
                 remove_isolated_bubbles()
 
                 BubblesGrid.set_one_empty_line()
-                remove_extinct_colors(consts.bubble_colors)
+                remove_extinct_imgs(consts.bubble_imgs)
 
                 Stack.add_bubble(Stack.get_length())
 
@@ -140,15 +140,15 @@ def remove_isolated_bubbles():
 # ---------------------------------your code-----------------------------------
 # -----------------------------------------------------------------------------
 
-def remove_extinct_colors(bubble_colors):
+def remove_extinct_imgs(bubble_imgs):
     # TODO: implement
-    grid_colors = BubblesGrid.colors_on_grid()
-    stack_colors = Stack.colors_on_stack()
+    grid_imgs = BubblesGrid.imgs_on_grid()
+    stack_imgs = Stack.imgs_on_stack()
 
-    for color in bubble_colors:
-        if color not in grid_colors:
-            if color not in stack_colors:
-                bubble_colors.remove(color)
+    for img in bubble_imgs:
+        if img not in grid_imgs:
+            if img not in stack_imgs:
+                bubble_imgs.remove(img)
 
 
 def is_lose():
@@ -162,7 +162,7 @@ def is_win():
     # TODO: implement
     # passing only on first row
     for bubble in BubblesGrid.bubbles_grid[0]:
-        if bubble["color"] != "EMPTY":
+        if bubble["img"] != "EMPTY":
             return False
     return True
 
