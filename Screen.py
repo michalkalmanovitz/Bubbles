@@ -3,20 +3,26 @@ import consts
 import pygame
 import math
 import BubblesGrid
+import random
+
 
 screen = pygame.display.set_mode(
         (consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
 
 
 def draw_bubble(bubble):
-    pygame.draw.circle(screen, bubble["color"],
-                       center=(bubble["center_x"], bubble["center_y"]),
-                       radius=bubble["radius"])
+    bubble_draw = bubble["color"]
+    sized_bubble = pygame.transform.scale(bubble_draw, (
+        consts.BUBBLE_WIDTH, consts.BUBBLE_HEIGHT))
 
+    screen.blit(sized_bubble, (bubble["center_x"], bubble["center_y"]))
 
 def draw_bubbles_popping(bubbles_popping):
     for bubble in bubbles_popping:
         draw_bubble(bubble)
+        bubble_pop = pygame.mixer.Sound('mp3/bubble_pop.mp3')
+        bubble_pop.play()
+
 
 
 def calc_mouse_angle(mouse_pos):
@@ -71,12 +77,15 @@ def draw_score(score, max_score):
 def draw_lose_message():
     draw_message(consts.LOSE_MESSAGE, consts.LOSE_FONT_SIZE,
                  consts.LOSE_COLOR, consts.LOSE_LOCATION)
+    lose_sound = pygame.mixer.Sound('mp3/lose_sound.mp3')
+    lose_sound.play()
 
 
 def draw_win_message():
     draw_message(consts.WIN_MESSAGE, consts.WIN_FONT_SIZE,
                  consts.WIN_COLOR, consts.WIN_LOCATION)
-
+    win_sound = pygame.mixer.Sound('mp3/win_sound.mp3')
+    win_sound.play()
 
 def draw_message(message, font_size, color, location):
     font = pygame.font.SysFont(consts.FONT_NAME, font_size)
@@ -96,6 +105,8 @@ def draw_game(game_state):
     draw_turns(game_state["turns_left_to_add_row"])
     draw_score(game_state["score"], game_state["max_score"])
     Stack.draw()
+
+
 
     if len(game_state["bubbles_popping"]):
         BubblesGrid.animate_bubbles_pop(game_state["bubbles_popping"])

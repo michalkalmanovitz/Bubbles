@@ -1,8 +1,8 @@
-import consts
-import Bubble
 import random
+
+import Bubble
 import Screen
-import pygame
+import consts
 
 bubbles_grid = []
 
@@ -73,13 +73,11 @@ def get_neighbors_directions(row_number):
     return neighbors_directions
 
 
-def pop_bubbles(bubbles_to_pop_locations, bubble_pop):
+def pop_bubbles(bubbles_to_pop_locations):
     bubbles_popped = []
     for bubble_location in bubbles_to_pop_locations:
         bubbles_popped.append(Bubble.pop(bubbles_grid, bubble_location))
-        # for each popped bubble, sound playes
-        bubble_pop.play()
-
+        # for each popped bubble, sound plays
     return bubbles_popped
 
 
@@ -206,6 +204,7 @@ def find_bubble_location_in_grid(bullet_bubble):
                 fitted_column = column
 
     return fitted_row, fitted_column
+
 
 def colors_on_grid():
     grid_colors = []

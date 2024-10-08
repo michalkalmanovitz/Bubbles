@@ -27,7 +27,7 @@ state["rotated_arrow"] = state["original_arrow"]
 
 def main():
     pygame.init()
-    bubble_pop = pygame.mixer.Sound('bubble_pop.mp3')
+
     BubblesGrid.create()
     Stack.create(consts.STACK_SIZE)
 
@@ -54,7 +54,7 @@ def main():
                     [])
 
                 if BubblesGrid.should_bubbles_pop(same_color_cluster):
-                    state["bubbles_popping"] = BubblesGrid.pop_bubbles(same_color_cluster, bubble_pop)
+                    state["bubbles_popping"] = BubblesGrid.pop_bubbles(same_color_cluster)
                     # points appended to total score as much of bubbles that were popped
                     state["score"] += len(state["bubbles_popping"])
                     if state["score"] > state["max_score"]:
@@ -66,7 +66,8 @@ def main():
                     state["turns_left_to_add_row"] -= 1
 
                     # for each round without popping, 3 points deducted
-                    state["score"] -= 3
+                    if state["score"] > 0:
+                        state["score"] -= 3
 
                     if state["turns_left_to_add_row"] == 0:
                         BubblesGrid.add_new_line()
@@ -75,7 +76,7 @@ def main():
                         state["turns_left_to_add_row"] = \
                             consts.NUM_OF_TURNS_TO_ADD_ROW
 
-                remove_isolated_bubbles(bubble_pop)
+                remove_isolated_bubbles()
 
                 BubblesGrid.set_one_empty_line()
                 remove_extinct_colors(consts.bubble_colors)
@@ -127,12 +128,12 @@ def move_bubble():
                                      state["bubble_direction"][1])
 
 
-def remove_isolated_bubbles(bubble_pop):
+def remove_isolated_bubbles():
     isolated_bubbles_locations = BubblesGrid.find_isolated_bubbles()
 
     if len(isolated_bubbles_locations) > 0:
         state["bubbles_popping"] += \
-            BubblesGrid.pop_bubbles(isolated_bubbles_locations, bubble_pop)
+            BubblesGrid.pop_bubbles(isolated_bubbles_locations)
 
 
 # -----------------------------------------------------------------------------
